@@ -1,0 +1,24 @@
+{
+  "name": "HandsOnWithBlazor",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "tailwind": "postcss Client/wwwroot/css/app.scss -o Client/wwwroot/css/app.css",
+    "build": "webpack --config webpack.config.js"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.2",
+    "file-loader": "^6.2.0",
+    "postcss": "^8.4.5",
+    "postcss-cli": "^9.1.0",
+    "postcss-loader": "^6.2.1",
+    "sass": "^1.49.0",
+    "sass-loader": "^12.4.0",
+    "tailwindcss": "^3.0.15",
+    "webpack": "^5.66.0",
+    "webpack-cli": "^4.9.1",
+    "webpack-fix-style-only-entries": "^0.6.1",
+    "yarn-upgrade-all": "^0.6.1"
+  }
+}

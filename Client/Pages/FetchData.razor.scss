@@ -1,0 +1,23 @@
+﻿.table-wrapper {
+  @apply min-w-full text-center;  
+}
+
+.thead-wrapper {
+    @apply border-b bg-white;
+}
+
+.thead-th {
+    @apply text-sm font-medium text-gray-900 px-6 py-2;
+}
+
+.tbody-tr {
+    @apply bg-white border-b;
+}
+
+.tbody-td-first {
+    @apply px-6 py-2 whitespace-nowrap text-sm font-medium text-gray-900;
+}
+
+.tbody-td {
+    @apply text-sm text-gray-900 font-light px-6 py-2 whitespace-nowrap;
+}
