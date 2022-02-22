@@ -1,7 +1,57 @@
-::deep .nav-link-item {
-    @apply text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium;    
+.container {
+  @apply relative w-full;
 }
 
-::deep .active {
-    @apply bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium;
+.navigation {
+  @apply fixed h-full w-px-300 bg-blue-500 overflow-hidden duration-0.5 border-l-10 border-blue-500 border-solid;
+}
+
+.navigation ul {
+  @apply absolute top-0 left-0 w-full;
+}
+
+.navigation ul li {
+  @apply relative w-full list-none hover:bg-white hover:rounded-l-px-30;
+}
+
+.navigation ul li.active {
+  @apply bg-white rounded-l-px-30;
+}
+
+.navigation ul li:nth-child(1) {
+  @apply mb-10 pointer-events-none;
+}
+
+/* 
+    To overwrite the Blazor build-in component's style 
+    need using ::deep keyword to make the effect happens.
+*/
+.navigation ul li ::deep a {
+  @apply relative w-full flex no-underline text-white hover:text-blue-500;
+}
+
+.navigation ul li ::deep a.active {
+  @apply text-blue-500;
+}
+
+.navigation ul li ::deep a.active::before,
+.navigation ul li:hover ::deep a::before {
+  @apply content-[''] absolute right-0 -top-px-50 w-px-50 h-px-50 bg-transparent rounded-p-1/2 shadow-tr-curve pointer-events-none;
+}
+
+.navigation ul li ::deep a.active::after,
+.navigation ul li:hover ::deep a::after {
+  @apply content-[''] absolute right-0 -bottom-px-50 w-px-50 h-px-50 bg-transparent rounded-p-1/2 shadow-br-curve pointer-events-none;
+}
+
+.navigation ul li a .icon {
+  @apply relative block min-w-px-60 h-px-60 leading-px-70 text-center;
+}
+
+.navigation ul li a .icon ion-icon {
+  @apply text-2xl;
+}
+
+.navigation ul li a .title {
+  @apply relative block py-0 px-2.5 h-px-60 leading-px-60 whitespace-nowrap;
 }

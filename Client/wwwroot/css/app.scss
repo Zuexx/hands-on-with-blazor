@@ -2,9 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-.html-wrapper {
-  @apply h-full bg-gray-100;
-}
-.body-wapper {
-  @apply h-full;
+body {
+  @apply min-h-screen overflow-x-hidden;
 }
