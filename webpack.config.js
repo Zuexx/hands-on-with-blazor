@@ -62,7 +62,7 @@ var config = {
 // Define the mapping component name and folder name
 const componentsArray = [
   ["app", "wwwroot/css"],
-  ["Counter", "Pages"],
+  ["Card", "Components"],
   ["Header", "Shared"],
   ["MainLayout", "Shared"],
   ["NavMenu", "Shared"],
