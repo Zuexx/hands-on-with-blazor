@@ -4,15 +4,20 @@ using System.Net.Http.Json;
 
 namespace HandsOnWithBlazor.Client.Pages
 {
-    public partial class FetchData:ComponentBase
+    public partial class FetchData : ComponentBase
     {
-        [Inject] private HttpClient Http { get; set; }
+        [Inject] private HttpClient _httpClient { get; set; }
 
         private WeatherForecast[]? forecasts;
 
+        public FetchData(HttpClient httpClient)
+        {
+            _httpClient = httpClient;
+        }
+
         protected override async Task OnInitializedAsync()
         {
-            forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("WeatherForecast");
+            forecasts = await _httpClient.GetFromJsonAsync<WeatherForecast[]>("WeatherForecast");
         }
     }
 }

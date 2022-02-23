@@ -1,9 +1,9 @@
-.container {
-  @apply relative w-full;
-}
-
 .navigation {
   @apply fixed h-full w-px-300 bg-blue-500 overflow-hidden duration-0.5 border-l-10 border-blue-500 border-solid;
+}
+
+.navigation.toggled {
+  @apply w-px-80;
 }
 
 .navigation ul {
@@ -36,12 +36,12 @@
 
 .navigation ul li ::deep a.active::before,
 .navigation ul li:hover ::deep a::before {
-  @apply content-[''] absolute right-0 -top-px-50 w-px-50 h-px-50 bg-transparent rounded-p-1/2 shadow-tr-curve pointer-events-none;
+  @apply content-[''] absolute right-0 -top-px-50 w-px-50 h-px-50 bg-transparent rounded-%-50 shadow-tr-curve pointer-events-none;
 }
 
 .navigation ul li ::deep a.active::after,
 .navigation ul li:hover ::deep a::after {
-  @apply content-[''] absolute right-0 -bottom-px-50 w-px-50 h-px-50 bg-transparent rounded-p-1/2 shadow-br-curve pointer-events-none;
+  @apply content-[''] absolute right-0 -bottom-px-50 w-px-50 h-px-50 bg-transparent rounded-%-50 shadow-br-curve pointer-events-none;
 }
 
 .navigation ul li a .icon {

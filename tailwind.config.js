@@ -4,14 +4,21 @@ module.exports = {
   theme: {
     extend: {
       width: {
+        'px-40':'40px',
         'px-50': '50px',
+        'px-60' : '60px',
+        'px-80' : '80px',
         'px-300': '300px',
+        'px-400': '400px',
+        'calc-80':'calc(100vw - 80px)',
+        'calc-300': 'calc(100vw - 300px)'        
         // 'full-2x':'200%'
       },
-      minWidth: {
+      minWidth: {        
         'px-60':'60px'
       },
       height: {
+        'px-40':'40px',
         'px-50':'50px',
         'px-60':'60px'
       },
@@ -25,12 +32,15 @@ module.exports = {
       transitionDuration: {
         '0.5' : '0.5s'
       },
-      borderRadius: {
+      borderRadius: {        
         'px-30': '30px',
-        'p-1/2': '50%'
+        'px-40': '40px',
+        '%-50': '50%'
       },
       inset: {
-        '-px-50': '-50px'
+        '-px-50': '-50px',
+        'px-80': '80px',
+        'px-300': '300px'
       },
       boxShadow: {
         'tr-curve': '35px 35px 0 10px #fff',

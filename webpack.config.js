@@ -63,7 +63,7 @@ var config = {
 const componentsArray = [
   ["app", "wwwroot/css"],
   ["Counter", "Pages"],
-  ["FetchData", "Pages"],
+  ["Header", "Shared"],
   ["MainLayout", "Shared"],
   ["NavMenu", "Shared"],
 ];

@@ -1,8 +1,3 @@
-.container {
-  position: relative;
-  width: 100%;
-}
-
 .navigation {
   position: fixed;
   height: 100%;
@@ -15,6 +10,10 @@
   --tw-bg-opacity: 1;
   background-color: rgb(59 130 246/var(--tw-bg-opacity));
   transition-duration: 0.5s;
+}
+
+.navigation.toggled {
+  width: 80px;
 }
 
 .navigation ul {
