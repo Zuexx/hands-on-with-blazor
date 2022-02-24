@@ -2,34 +2,40 @@ const FixStyleOnlyEntriesPlugin = require("webpack-fix-style-only-entries");
 
 const path = require("path");
 
+const fs = require('fs');
+
+const is_scss = (file) => { 
+  return file.slice((file.lastIndexOf(".") - 1 >>> 0) + 2) === 'scss';
+}
+
 const mode = process.env.NODE_ENV || "development";
 
-var getEntryInfo = (folder, file) => {
-  if (file === "app")
-    return {
-      entry: __dirname + "/Client/" + folder + "/" + file + ".scss",
-      output: path.resolve(__dirname, "Client/" + folder),
-    };
-  else
-    return {
-      entry: __dirname + "/Client/" + folder + "/" + file + ".razor.scss",
-      output: path.resolve(__dirname, "Client/" + folder),
-    };
-};
+const processEntryInfo = (folder) => {          
+  var resolvedResults = [];
+  var arrayOfFiles = fs.readdirSync(folder);
 
-var generateConfigs = (componetsOfMap) => {
-  var entryObjectAssignConfigs = [];
-
-  componetsOfMap.forEach(function (value, key) {
-    var entryInfo = getEntryInfo(value, key);
-    entryObjectAssignConfigs.push(
-      Object.assign({}, config, {
-        name: key,
-        entry: [entryInfo.entry],
-        output: { path: entryInfo.output },
-      })
-    );
+  arrayOfFiles.forEach(file => {
+    if (is_scss(file)) {      
+      resolvedResults.push(
+        Object.assign({}, config, {
+          name: file.split('.').slice(0, -1).join('.'),
+          entry: [path.resolve(__dirname, folder, file)],
+          output: { path:  path.resolve(__dirname, folder) },
+        })
+      );
+    }
   });
+  return resolvedResults;
+}
+
+const generateConfigs = (pathOfArray) => {
+  var entryObjectAssignConfigs = [];
+  
+  pathOfArray.forEach(function (value) {    
+    var resolvedResults = processEntryInfo(value);    
+
+    entryObjectAssignConfigs = entryObjectAssignConfigs.concat(resolvedResults);
+  });  
 
   return entryObjectAssignConfigs;
 };
@@ -59,13 +65,12 @@ var config = {
   plugins: [new FixStyleOnlyEntriesPlugin()],
 };
 
-// Define the mapping component name and folder name
-const componentsArray = [
-  ["app", "wwwroot/css"],
-  ["Card", "Components"],
-  ["Header", "Shared"],
-  ["MainLayout", "Shared"],
-  ["NavMenu", "Shared"],
-];
+// Define the related path info which need to be pre-processed.
+const PATH_INFO =
+  [
+    "./Client/wwwroot/css",
+    "./Client/Components",
+    "./Client/Shared"
+  ];
 
-module.exports = [generateConfigs(new Map(componentsArray))];
+module.exports = [generateConfigs(PATH_INFO)];
