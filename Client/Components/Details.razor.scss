@@ -1,0 +1,67 @@
+.details {
+  @apply relative w-full p-5 grid grid-cols-2 gap-7 mt-2;
+}
+
+.details .recentOrders {
+  @apply relative grid min-h-px-500 bg-white p-5 shadow-card rounded-2xl;
+}
+
+.cardHeader {
+  @apply flex justify-between items-start;
+}
+
+.cardHeader h2 {
+  @apply font-semibold text-blue-500;
+}
+
+.cardHeader .btn {
+  @apply relative px-2 py-1 bg-blue-500 no-underline text-white rounded-md;
+}
+
+.details table {
+  @apply w-full border-collapse top-2;
+}
+
+.details table thead td {
+  @apply font-semibold;
+}
+
+.details .recentOrders table tr:last-child {
+  @apply border-none;
+}
+
+.details .recentOrders table tbody tr {
+  @apply text-black border-b border-solid border-gray-200 hover:text-white hover:bg-blue-500;
+}
+
+.details .recentOrders table tr td {
+  @apply p-2;
+}
+
+.details .recentOrders table tr td:nth-child(2),
+.details .recentOrders table tr td:last-child {
+  @apply text-right;
+}
+
+.details .recentOrders table tr td:nth-child(3) {
+  @apply text-center;
+}
+
+.status.pending,
+.status.delivered,
+.status.return,
+.status.in-progress {
+  @apply py-1 px-1 bg-red-600 rounded-md text-sm font-medium text-white;
+}
+
+.status.delivered {
+  @apply bg-green-600;
+}
+
+.status.return {
+  @apply bg-gray-600;
+}
+
+.status.in-progress {
+  @apply bg-indigo-600;
+}

@@ -5,3 +5,13 @@
 body {
   @apply min-h-screen overflow-x-hidden;
 }
+
+@layer base {
+  h1 {
+    @apply text-3xl;
+  }
+
+  h2 {
+    @apply text-2xl;
+  }
+}
