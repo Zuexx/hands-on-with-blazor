@@ -3,13 +3,14 @@
   margin-top: 0.5rem;
   display: grid;
   width: 100%;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1.75rem;
   padding: 1.25rem;
 }
 
 .details .recentOrders {
   position: relative;
+  grid-column: span 2/span 2;
   display: grid;
   min-height: 500px;
   border-radius: 1rem;
@@ -28,7 +29,6 @@
 }
 
 .cardHeader h2 {
-  font-weight: 600;
   --tw-text-opacity: 1;
   color: rgb(59 130 246/var(--tw-text-opacity));
 }
