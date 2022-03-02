@@ -3,7 +3,7 @@
 }
 
 .main {
-  @apply absolute w-calc-300 min-h-screen left-px-300 bg-white duration-0.5;
+  @apply absolute min-h-screen left-full bg-white duration-0.5 sm:w-calc-300 sm:left-px-300;
 }
 
 .main.toggled {

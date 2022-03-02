@@ -5,14 +5,22 @@
 
 .main {
   position: absolute;
-  left: 300px;
+  left: 100%;
   min-height: 100vh;
-  width: calc(100vw - 300px);
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255/var(--tw-bg-opacity));
   transition-duration: 0.5s;
 }
 
+@media (min-width: 640px) {
+  .main {
+    left: 300px;
+  }
+
+  .main {
+    width: calc(100vw - 300px);
+  }
+}
 .main.toggled {
   left: 80px;
   width: calc(100vw - 80px);

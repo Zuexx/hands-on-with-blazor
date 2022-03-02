@@ -1,4 +1,6 @@
 .cardHeader h2 {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
   --tw-text-opacity: 1;
   color: rgb(59 130 246/var(--tw-text-opacity));
 }

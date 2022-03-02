@@ -3,7 +3,11 @@
 }
 
 .toggle {
-  @apply relative w-px-60 h-px-60 flex justify-center items-center text-3xl cursor-pointer;
+  @apply z-10001 right-0 left-initial w-px-60 h-px-60 fixed flex justify-center items-center text-white text-3xl cursor-pointer sm:relative sm:text-inherit;
+}
+
+.main.toggled .toggle {
+  @apply relative text-inherit;
 }
 
 .search {
@@ -23,7 +27,7 @@
 }
 
 .user {
-  @apply relative w-px-40 h-px-40 rounded-%-50 overflow-hidden cursor-pointer;
+  @apply relative min-w-px-40 w-px-40 h-px-40 rounded-%-50 overflow-hidden cursor-pointer;
 }
 
 .user img {

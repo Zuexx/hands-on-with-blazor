@@ -1,7 +1,8 @@
 .navigation {
   position: fixed;
+  z-index: 10000;
   height: 100%;
-  width: 300px;
+  width: 100%;
   overflow: hidden;
   border-left-width: 10px;
   border-style: solid;
@@ -12,6 +13,11 @@
   transition-duration: 0.5s;
 }
 
+@media (min-width: 640px) {
+  .navigation {
+    width: 300px;
+  }
+}
 .navigation.toggled {
   width: 80px;
 }
