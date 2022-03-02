@@ -1,9 +1,5 @@
-.details {
-  @apply relative w-full p-5 grid grid-cols-3 gap-7 mt-2;
-}
-
 .details .recentOrders {
-  @apply relative grid min-h-px-500 bg-white p-5 shadow-card rounded-2xl col-span-2;
+  @apply relative grid min-h-px-500 bg-white p-5 shadow-card rounded-2xl overflow-x-auto md:col-span-2;
 }
 
 .cardHeader {
@@ -11,7 +7,7 @@
 }
 
 .cardHeader h2 {
-  @apply text-blue-500;
+  @apply text-blue-500 text-xl;
 }
 
 .cardHeader .btn {
@@ -51,7 +47,7 @@
 .status.delivered,
 .status.return,
 .status.in-progress {
-  @apply py-1 px-1 bg-red-600 rounded-md text-sm font-medium text-white;
+  @apply py-1 px-1 bg-red-600 rounded-md text-sm font-medium text-white whitespace-nowrap;
 }
 
 .status.delivered {

@@ -1,5 +1,5 @@
 .cardBox {
-  @apply relative w-full p-5 grid grid-cols-4 gap-7;
+  @apply relative w-full p-5 grid grid-cols-single gap-7 sm:grid-cols-double md:grid-cols-quadruple;
 }
 
 .cardBox .card {

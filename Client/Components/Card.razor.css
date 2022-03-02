@@ -2,11 +2,21 @@
   position: relative;
   display: grid;
   width: 100%;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(1, 1fr);
   gap: 1.75rem;
   padding: 1.25rem;
 }
 
+@media (min-width: 640px) {
+  .cardBox {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 768px) {
+  .cardBox {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
 .cardBox .card {
   position: relative;
   display: flex;
