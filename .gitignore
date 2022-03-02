@@ -16,6 +16,8 @@ nupkg/
 *.user
 *.userosscache
 *.sln.docstates
+Client/**/*.css
+yarn-error.log
 
 # Build results
 [Dd]ebug/
