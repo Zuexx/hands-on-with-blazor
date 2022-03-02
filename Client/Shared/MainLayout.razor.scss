@@ -1,0 +1,11 @@
+.container {
+  @apply relative w-full;
+}
+
+.main {
+  @apply absolute min-h-screen left-full bg-white duration-0.5 sm:w-calc-300 sm:left-px-300;
+}
+
+.main.toggled {
+  @apply w-calc-80 left-px-80;
+}

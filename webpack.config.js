@@ -1,42 +1,48 @@
-const FixStyleOnlyEntriesPlugin = require("webpack-fix-style-only-entries");
+const FixStyleOnlyEntriesPlugin = require('webpack-fix-style-only-entries');
 
-const path = require("path");
+const path = require('path');
 
-const mode = process.env.NODE_ENV || "development";
+const fs = require('fs');
 
-var getEntryInfo = (folder, file) => {
-  if (file === "app")
-    return {
-      entry: __dirname + "/Client/" + folder + "/" + file + ".scss",
-      output: path.resolve(__dirname, "Client/" + folder),
-    };
-  else
-    return {
-      entry: __dirname + "/Client/" + folder + "/" + file + ".razor.scss",
-      output: path.resolve(__dirname, "Client/" + folder),
-    };
-};
+const is_scss = (file) => { 
+  return file.slice((file.lastIndexOf('.') - 1 >>> 0) + 2) === 'scss';
+}
 
-var generateConfigs = (componetsOfMap) => {
-  var entryObjectAssignConfigs = [];
+const mode = process.env.NODE_ENV || 'development';
 
-  componetsOfMap.forEach(function (value, key) {
-    var entryInfo = getEntryInfo(value, key);
-    entryObjectAssignConfigs.push(
-      Object.assign({}, config, {
-        name: key,
-        entry: [entryInfo.entry],
-        output: { path: entryInfo.output },
-      })
-    );
+const processEntryInfo = (folder) => {          
+  var resolvedResults = [];
+  var arrayOfFiles = fs.readdirSync(folder);
+
+  arrayOfFiles.forEach(file => {
+    if (is_scss(file)) {      
+      resolvedResults.push(
+        Object.assign({}, config, {
+          name: file.split('.').slice(0, -1).join('.'),
+          entry: [path.resolve(__dirname, folder, file)],
+          output: { path:  path.resolve(__dirname, folder) },
+        })
+      );
+    }
   });
+  return resolvedResults;
+}
+
+const generateConfigs = (pathOfArray) => {
+  var entryObjectAssignConfigs = [];
+  
+  pathOfArray.forEach(function (value) {    
+    var resolvedResults = processEntryInfo(value);    
+
+    entryObjectAssignConfigs = entryObjectAssignConfigs.concat(resolvedResults);
+  });  
 
   return entryObjectAssignConfigs;
 };
 
 var config = {
   mode: mode,
-  devtool: "source-map",
+  devtool: 'source-map',
   output: {
     clean: true,
   },
@@ -47,11 +53,11 @@ var config = {
         exclude: /node_modules/,
         use: [
           {
-            loader: "file-loader",
-            options: { name: "[name].css" },
+            loader: 'file-loader',
+            options: { name: '[name].css' },
           },
-          "sass-loader",
-          "postcss-loader",
+          'sass-loader',
+          'postcss-loader',
         ],
       },
     ],
@@ -59,13 +65,13 @@ var config = {
   plugins: [new FixStyleOnlyEntriesPlugin()],
 };
 
-// Define the mapping component name and folder name
-const componentsArray = [
-  ["app", "wwwroot/css"],
-  ["Counter", "Pages"],
-  ["FetchData", "Pages"],
-  ["MainLayout", "Shared"],
-  ["NavMenu", "Shared"],
-];
+// Define the related path info which need to be pre-processed.
+const PATH_INFO =
+  [
+    './Client/wwwroot/css',
+    './Client/Components',
+    './Client/Shared',
+    './Client/Pages',
+  ];
 
-module.exports = [generateConfigs(new Map(componentsArray))];
+module.exports = [generateConfigs(PATH_INFO)];

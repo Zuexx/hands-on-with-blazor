@@ -2,9 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
-.html-wrapper {
-  @apply h-full bg-gray-100;
+body {
+  @apply min-h-screen overflow-x-hidden;
 }
-.body-wapper {
-  @apply h-full;
+
+@layer base {
+  h1 {
+    @apply text-3xl font-semibold;
+  }
+
+  h2 {
+    @apply text-2xl font-semibold;
+  }
+
+  h3 {
+    @apply text-xl font-semibold;
+  }
+
+  h4 {
+    @apply text-lg font-semibold;
+  }
 }

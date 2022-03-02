@@ -1,0 +1,25 @@
+.cardBox {
+  @apply relative w-full p-5 grid grid-cols-single gap-7 sm:grid-cols-double md:grid-cols-quadruple;
+}
+
+.cardBox .card {
+  @apply relative bg-white p-7 shadow-card rounded-2xl flex justify-between cursor-pointer hover:bg-blue-500;
+}
+
+.cardBox .card .numbers {
+  @apply relative font-medium text-4xl text-blue-500;
+}
+
+.cardBox .card .cardName {
+  @apply relative text-base top-1 text-gray-600;
+}
+
+.cardBox .card .iconBx {
+  @apply text-4xl text-gray-600;
+}
+
+.cardBox .card:hover .numbers,
+.cardBox .card:hover .cardName,
+.cardBox .card:hover .iconBx {
+  @apply text-white;
+}

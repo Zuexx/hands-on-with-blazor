@@ -1,0 +1,35 @@
+.header-content {
+  @apply w-full h-px-60 flex justify-between items-center px-2 py-0;
+}
+
+.toggle {
+  @apply z-10001 right-0 left-initial w-px-60 h-px-60 fixed flex justify-center items-center text-white text-3xl cursor-pointer sm:relative sm:text-inherit;
+}
+
+.main.toggled .toggle {
+  @apply relative text-inherit;
+}
+
+.search {
+  @apply relative w-px-400 my-0 mx-2;
+}
+
+.search label {
+  @apply relative w-full;
+}
+
+.search label input {
+  @apply w-full h-px-40 rounded-px-40 py-1 px-5 pl-8 outline-none border border-solid border-slate-400 text-lg;
+}
+
+.search label ion-icon {
+  @apply absolute top-0 left-2 text-xl;
+}
+
+.user {
+  @apply relative min-w-px-40 w-px-40 h-px-40 rounded-%-50 overflow-hidden cursor-pointer;
+}
+
+.user img {
+  @apply absolute top-0 left-0 w-full h-full object-cover;
+}

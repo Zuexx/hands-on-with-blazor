@@ -1,11 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" class="html-wrapper">
-  <head>
+<html lang="en">
+<head>
     <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-    />
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>HandsOnWithBlazor</title>
     <base href="/" />
     <link href="css/app.css" rel="stylesheet" />
@@ -13,9 +11,9 @@
     <link href="manifest.json" rel="manifest" />
     <link rel="apple-touch-icon" sizes="512x512" href="icon-512.png" />
     <link rel="apple-touch-icon" sizes="192x192" href="icon-192.png" />
-  </head>
+</head>
 
-  <body class="body-wrapper">
+<body>
     <div id="app">Loading...</div>
 
     <!--<div id="blazor-error-ui">
@@ -25,7 +23,11 @@
     </div>-->
     <script src="_framework/blazor.webassembly.js"></script>
     <script>
-      navigator.serviceWorker.register("service-worker.js");
+        navigator.serviceWorker.register("service-worker.js");
     </script>
-  </body>
+
+    <!-- import ionic icons -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
 </html>

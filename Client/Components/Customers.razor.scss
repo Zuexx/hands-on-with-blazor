@@ -1,0 +1,39 @@
+.cardHeader h2 {
+  @apply text-blue-500 text-xl;
+}
+
+.recentCustomers {
+  @apply relative grid min-h-px-500 p-5 bg-white shadow-card rounded-2xl;
+}
+
+.recentCustomers .imgBx {
+  @apply relative w-px-40 h-px-40 rounded-%-50 overflow-hidden;
+}
+
+.recentCustomers .imgBx img {
+  @apply relative top-0 left-0 w-full h-full object-cover;
+}
+
+.recentCustomers table {
+  @apply w-full;
+}
+
+.recentCustomers table tr {
+  @apply hover:text-white hover:bg-blue-500;
+}
+
+.recentCustomers table tr td {
+  @apply py-3 px-2;
+}
+
+.recentCustomers table tr td h4 {
+  @apply text-base font-medium;
+}
+
+.recentCustomers table tr td h4 span {
+  @apply text-sm text-gray-400;
+}
+
+.recentCustomers table tr:hover td h4 span {
+  @apply text-white;
+}
