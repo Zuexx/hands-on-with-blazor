@@ -1,8 +1,13 @@
+using HandsOnWithBlazor.Application.Handlers;
+using MediatR;
 using Microsoft.AspNetCore.ResponseCompression;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+// Add MediatR service
+builder.Services.AddMediatR(typeof(WeatherForcastRequestHandler).Assembly);
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();

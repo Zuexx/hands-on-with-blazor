@@ -8,12 +8,7 @@ namespace HandsOnWithBlazor.Client.Pages
     {
         [Inject] private HttpClient _httpClient { get; set; }
 
-        private WeatherForecast[]? forecasts;
-
-        public FetchData(HttpClient httpClient)
-        {
-            _httpClient = httpClient;
-        }
+        private WeatherForecast[]? forecasts;        
 
         protected override async Task OnInitializedAsync()
         {
