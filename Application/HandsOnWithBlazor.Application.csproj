@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Domain\HandsOnWithBlazor.Domain.csproj" />
+    <ProjectReference Include="..\Infrastructure\HandsOnWithBlazor.Infrastructure.csproj" />
     <ProjectReference Include="..\Persistence\HandsOnWithBlazor.Persistence.csproj" />
     <ProjectReference Include="..\Shared\HandsOnWithBlazor.Shared.csproj" />
   </ItemGroup>

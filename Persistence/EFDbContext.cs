@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HandsOnWithBlazor.Persistence
 {
-    public class EFDataContext : IdentityDbContext
+    public class EFDbContext : IdentityDbContext
     {
-        public EFDataContext(DbContextOptions<EFDataContext> options)
+        public EFDbContext(DbContextOptions<EFDbContext> options)
            : base(options)
         {
         }

@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HandsOnWithBlazor.Applicati
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HandsOnWithBlazor.Domain", "Domain\HandsOnWithBlazor.Domain.csproj", "{7FA648F9-AC97-4810-93DB-97F018967ECE}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HandsOnWithBlazor.Infrastructure", "Infrastructure\HandsOnWithBlazor.Infrastructure.csproj", "{57EDF6E4-F316-466D-9FF8-195E09B5C27E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{7FA648F9-AC97-4810-93DB-97F018967ECE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7FA648F9-AC97-4810-93DB-97F018967ECE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7FA648F9-AC97-4810-93DB-97F018967ECE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57EDF6E4-F316-466D-9FF8-195E09B5C27E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57EDF6E4-F316-466D-9FF8-195E09B5C27E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57EDF6E4-F316-466D-9FF8-195E09B5C27E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57EDF6E4-F316-466D-9FF8-195E09B5C27E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
