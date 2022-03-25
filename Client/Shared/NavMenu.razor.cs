@@ -29,8 +29,6 @@ namespace HandsOnWithBlazor.Client.Shared
 
         private string GetActive(string href, NavLinkMatch navLinkMatch = NavLinkMatch.Prefix) => IsActive(href, navLinkMatch) ? "active" : string.Empty;
 
-        private string IsToggle() => _stateService.Value.IsToggle ? "toggled" : string.Empty;
-
         public void Dispose()
         {
             _navigationManager.LocationChanged -= (s, e) => StateHasChanged();

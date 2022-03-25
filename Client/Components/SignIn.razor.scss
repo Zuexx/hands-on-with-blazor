@@ -1,0 +1,27 @@
+.signinForm {
+  @apply absolute left-0 w-full p-12 ease-in-out duration-0.5 delay-25;
+}
+
+.formPnl.active .signinForm {
+  @apply -left-full;
+}
+
+form {
+  @apply w-full flex flex-col;
+}
+
+h3 {
+  @apply font-medium text-2xl text-black mb-5;
+}
+
+input {
+  @apply w-full mb-5 p-2 outline-none border border-solid border-gray-700 text-base;
+}
+
+input[type="button"] {
+  @apply bg-sky-700 border-none text-white w-px-100 cursor-pointer;
+}
+
+.forgot {
+  @apply underline;
+}

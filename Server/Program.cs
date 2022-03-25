@@ -1,9 +1,7 @@
 using AuthPermissions;
 using AuthPermissions.AspNetCore;
 using AuthPermissions.AspNetCore.Services;
-using AuthPermissions.AspNetCore.StartupServices;
 using HandsOnWithBlazor.Application.Handlers;
-using HandsOnWithBlazor.Infrastructure.Security;
 using HandsOnWithBlazor.Persistence;
 using HandsOnWithBlazor.Shared.Constants;
 using HandsOnWithBlazor.Shared.Enumerations;
@@ -13,7 +11,6 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using RunMethodsSequentially;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);

@@ -1,0 +1,31 @@
+﻿.container {
+  @apply relative items-center w-px-800 h-px-500 m-auto;
+}
+
+.basePnl {
+  @apply absolute top-10 w-full h-px-420 bg-sky-700 shadow-authBase flex justify-center items-center ease-in-out duration-500;
+}
+
+.basePnl.active {
+  @apply bg-pink-700;
+}
+
+.box {
+  @apply relative w-1/2 h-full flex justify-center items-center flex-col;
+}
+
+h2 {
+  @apply text-white;
+}
+
+button {
+  @apply cursor-pointer px-4 py-2 bg-white text-slate-700 text-base font-medium border-none;
+}
+
+.formPnl {
+  @apply absolute z-1000 bg-white top-0 left-0 w-1/2 h-full flex justify-center items-center shadow-authForm ease-in-out duration-500 overflow-hidden;
+}
+
+.formPnl.active {
+  @apply left-1/2;
+}

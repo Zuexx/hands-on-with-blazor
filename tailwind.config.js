@@ -14,8 +14,10 @@ module.exports = {
         'px-50': '50px',
         'px-60': '60px',
         'px-80': '80px',
-        'px-300': '300px',        
+        'px-100': '100px',
+        'px-300': '300px',
         'px-400': '400px',
+        'px-800': '800px',
         'calc-80': 'calc(100vw - 80px)',
         'calc-300': 'calc(100vw - 300px)',
         // 'full-2x':'200%'
@@ -31,6 +33,8 @@ module.exports = {
         'px-40': '40px',
         'px-50': '50px',
         'px-60': '60px',
+        'px-420': '420px',
+        'px-500': '500px'
       },
       lineHeight: {
         'px-60': '60px',
@@ -58,6 +62,8 @@ module.exports = {
         'tr-curve': '35px 35px 0 10px #fff',
         'br-curve': '35px -35px 0 10px #fff',
         'card': '0 7px 25px rgba(0,0,0,0.08)',
+        'authBase': '0 5px 45px rgba(0,0,0,0.15)',
+        'authForm': '0 5px 45px rgba(0,0,0,0.25)'
       },
       gridTemplateColumns: {
         'single': 'repeat(1, 1fr)',
@@ -66,9 +72,14 @@ module.exports = {
         'quadruple':'repeat(4, 1fr)',
       },
       zIndex: {
+        '1000': '1000',
         '10000': '10000',
         '10001':'10001'
+      },
+      transitionDelay: {
+        '25': '25ms'
       }
+
     }
   },
   plugins: [],

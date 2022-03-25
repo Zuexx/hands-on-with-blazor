@@ -15,13 +15,20 @@ namespace HandsOnWithBlazor.Application.Handlers
 
         public async Task<IEnumerable<WeatherForecast>> Handle(WeatherForcastRequestQuery query, CancellationToken cancellation)
         {
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+
+            IEnumerable<WeatherForecast> result = default!;
+
+            await Task.Run(() =>
             {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = Random.Shared.Next(-20, 55),
-                Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-            })
-            .ToArray();
+                result = Enumerable.Range(1, 5).Select(index => new WeatherForecast
+                {
+                    Date = DateTime.Now.AddDays(index),
+                    TemperatureC = Random.Shared.Next(-20, 55),
+                    Summary = Summaries[Random.Shared.Next(Summaries.Length)]
+                }).ToArray();
+            });
+
+            return result;
         }
     }
 }

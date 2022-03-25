@@ -1,0 +1,9 @@
+<div class="signinForm">
+    <form>
+        <h3>Sign In</h3>
+        <input type="text" placeholder="User Name" @bind-value="_user.Email" />
+        <input type="password" placeholder="Password" @bind-value="_user.Password"/>
+        <input type="button" value="Login" @onclick="HandleLoginClicked"  />
+        <a href="#" class="forgot">Forgot Password</a>
+    </form>
+</div>

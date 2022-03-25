@@ -1,0 +1,18 @@
+@page "/authenticate"
+
+<div class="container">
+    <div class='@(isSignUpActivated ? "basePnl active" : "basePnl")'>
+        <div class="box signin">
+            <h2>Already Have an Account ?</h2>
+            <button class="singinBtn" @onclick="((e) => HandleSignUpActivated(e, false))">Sign in</button>
+        </div>
+        <div class="box singup">
+            <h2>Don't Have an Account ?</h2>
+            <button class="signupBtn" @onclick="((e) => HandleSignUpActivated(e, true))">Sign up</button>
+        </div>
+    </div>
+    <div class='@(isSignUpActivated ? "formPnl active" : "formPnl")'>
+        <SignIn />
+        <SignUp />
+    </div>
+</div>
