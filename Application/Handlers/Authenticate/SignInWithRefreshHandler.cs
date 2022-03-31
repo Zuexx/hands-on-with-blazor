@@ -1,34 +1,38 @@
 ﻿using AuthPermissions.AspNetCore.JwtTokenCode;
-using HandsOnWithBlazor.Application.Queries;
+using HandsOnWithBlazor.Application.Handlers.Authenticate.Commands;
 using HandsOnWithBlazor.Shared.Models;
+using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using System.Net;
 
-namespace HandsOnWithBlazor.Application.Handlers
+namespace HandsOnWithBlazor.Application.Handlers.Authenticate
 {
-    public class SignInRequestHandler : IRequestHandler<SignInRequestQuery, ApiResponse<string>>
+    public class SignInWithRefreshHandler : IRequestHandler<SignInWithRefreshCommand, ApiResponse<TokenDto>>
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ITokenBuilder _tokenBuilder;
+        private readonly IMapper _mapper;
 
-        public SignInRequestHandler(
+        public SignInWithRefreshHandler(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
-            ITokenBuilder tokenBuilder)
+            ITokenBuilder tokenBuilder,
+            IMapper mapper)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _tokenBuilder = tokenBuilder;
+            _mapper = mapper;
         }
 
-        public async Task<ApiResponse<string>> Handle(SignInRequestQuery request, CancellationToken cancellation)
+        public async Task<ApiResponse<TokenDto>> Handle(SignInWithRefreshCommand request, CancellationToken cancellation)
         {
             var result = await _signInManager.PasswordSignInAsync(request.Email, request.Password, false, false);
 
-            ApiResponse<string> response =
-                new ApiResponse<string>(HttpStatusCode.OK.ToString(), string.Empty, string.Empty);
+            ApiResponse<TokenDto> response =
+                new ApiResponse<TokenDto>(HttpStatusCode.OK.ToString(), string.Empty, new TokenDto()) ;
 
             if (!result.Succeeded)
             {
@@ -39,7 +43,8 @@ namespace HandsOnWithBlazor.Application.Handlers
             }
             var user = await _userManager.FindByEmailAsync(request.Email);
 
-            response.Data = await _tokenBuilder.GenerateJwtTokenAsync(user.Id);
+            response.Data =  
+                _mapper.Map<TokenDto>(await _tokenBuilder.GenerateTokenAndRefreshTokenAsync(user.Id));
 
             return response;
         }

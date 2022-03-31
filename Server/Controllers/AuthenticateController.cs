@@ -1,51 +1,37 @@
-using HandsOnWithBlazor.Application.Queries;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using HandsOnWithBlazor.Shared.Models;
-using AuthPermissions.AspNetCore.JwtTokenCode;
+using HandsOnWithBlazor.Application.Handlers.Authenticate.Queries;
+using HandsOnWithBlazor.Application.Handlers.Authenticate.Commands;
 
 namespace HandsOnWithBlazor.Server.Controllers
 {
-    [AllowAnonymous]
     public class AuthenticateController : MediatRControllerBase
     {
+        [AllowAnonymous]
         [HttpPost("signin")]
-        public async Task<ApiResponse<string>> Authenticate(SignInRequestQuery query)
+        public async Task<ApiResponse<string>> Authenticate(SignInQuery query)
             => await Mediator.Send(query);
 
+        [AllowAnonymous]
         [HttpPost("signinwithrefresh")]
-        public async Task<ApiResponse<TokenAndRefreshToken>> AuthenticateWithRefresh(SignInWithRefreshRequestCommand command)
-            => await Mediator.Send(command);
+        public async Task<ApiResponse<TokenDto>> AuthenticateWithRefresh(SignInWithRefreshCommand command)
+           => await Mediator.Send(command);
 
-        /*
+        [AllowAnonymous]
         [HttpPost]
         [Route("refreshauthentication")]
-        public async Task<ActionResult<TokenAndRefreshToken>> RefreshAuthentication(TokenAndRefreshToken tokenAndRefresh)
-        {
-            var result = await _tokenBuilder.RefreshTokenUsingRefreshTokenAsync(tokenAndRefresh);
-            if (result.updatedTokens != null)
-                return result.updatedTokens;
+        public async Task<ApiResponse<TokenDto>> RefreshAuthentication(RefreshAuthenticationCommand command)
+            => await Mediator.Send(command);
 
-            return StatusCode(result.HttpStatusCode);
-        }
-
-        [Authorize]
         [HttpPost]
         [Route("logout")]
-        public async Task<ActionResult> Logout([FromServices] IDisableJwtRefreshToken service)
-        {
-            var userId = User.GetUserIdFromUser();
-            await service.MarkJwtRefreshTokenAsUsedAsync(userId);
-
-            return Ok();
-        }
+        public async Task<ApiResponse> Logout()
+            => await Mediator.Send(new SignOutCommand());
 
         [HttpGet]
         [Route("getuserpermissions")]
-        public ActionResult<List<string>> GetUsersPermissions([FromServices] IUsersPermissionsService service)
-        {
-            return service.PermissionsFromUser(User);
-        }
-        */
+        public async Task<ApiResponse<List<string>>> GetUsersPermissions()
+             => await Mediator.Send(new GetUserPermissionsQuery());
     }
 }

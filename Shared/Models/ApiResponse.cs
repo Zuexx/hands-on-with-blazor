@@ -1,11 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HandsOnWithBlazor.Shared.Models
+﻿namespace HandsOnWithBlazor.Shared.Models
 {
+    public struct ApiResponse
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }
+
+        public ApiResponse(string status, string message)
+        {
+            Status = status; ;
+            Message = message;            
+        }
+    }
+
     public struct ApiResponse<T> where T : class
     {
         public string Status { get; set; }

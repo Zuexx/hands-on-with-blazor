@@ -7,11 +7,18 @@ using HandsOnWithBlazor.Shared.Constants;
 using HandsOnWithBlazor.Shared.Enumerations;
 using HandsOnWithBlazor.Shared.Models;
 using MediatR;
+using MapsterMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Mapster;
+using HandsOnWithBlazor.Infrastructure.Security;
+using AuthPermissions.PermissionsCode;
+using HandsOnWithBlazor.Application;
+using AuthPermissions.AspNetCore.StartupServices;
+using RunMethodsSequentially;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -90,14 +97,28 @@ builder.Services
             TokenExpires = new TimeSpan(0, 5, 0), //Quick Token expiration because we use a refresh token
             RefreshTokenExpires = new TimeSpan(1, 0, 0, 0) //Refresh token is valid for one day
         };
-    })    
+    })
     .UsingEfCoreSqlServer(connectionString) //NOTE: This uses the same database as the individual accounts DB                                
     .IndividualAccountsAuthentication()
     .AddSuperUserToIndividualAccounts()    
     .RegisterFindUserInfoService<IndividualAccountUserLookup>()
-    //.AddRolesPermissionsIfEmpty(AppAuthSetupData.RolesDefinition)
-    //.AddAuthUsersIfEmpty(AppAuthSetupData.UsersRolesDefinition)    
-    .SetupAspNetCoreAndDatabase();
+    .AddRolesPermissionsIfEmpty(AppAuthSetupData.RolesDefinition)
+    .AddAuthUsersIfEmpty(AppAuthSetupData.UsersRolesDefinition)    
+    .SetupAspNetCoreAndDatabase(options =>
+    {
+        //Migrate individual account database
+        options.RegisterServiceToRunInJob<StartupServiceMigrateAnyDbContext<EFDbContext>>();
+        //Add demo users to the database
+        options.RegisterServiceToRunInJob<StartupServicesIndividualAccountsAddDemoUsers>();
+    });
+
+// TODO: Mapster config section should be set to an indivisual place.
+var config = new TypeAdapterConfig();
+builder.Services.AddSingleton(config);
+builder.Services.AddScoped<IMapper, ServiceMapper>();
+
+builder.Services.AddScoped<IDisableJwtRefreshToken, DisableJwtRefreshToken>();
+builder.Services.AddTransient<IUserAccessor, UserAccessor>();
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
@@ -119,8 +140,8 @@ app.UseHttpsRedirection();
 
 app.UseBlazorFrameworkFiles();
 app.UseStaticFiles();
-app.UseRouting();
 app.UseAuthentication();
+app.UseRouting();
 app.UseAuthorization();
 
 

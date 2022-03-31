@@ -3,7 +3,7 @@ using System.Text;
 
 namespace HandsOnWithBlazor.Infrastructure.Security
 {
-    public class Aes256Cipher
+    public class Aes256Cipher : IAes256Cipher
     {
         private readonly byte[] _key;
 
