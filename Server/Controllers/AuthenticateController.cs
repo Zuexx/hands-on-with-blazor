@@ -15,13 +15,13 @@ namespace HandsOnWithBlazor.Server.Controllers
 
         [AllowAnonymous]
         [HttpPost("signinwithrefresh")]
-        public async Task<ApiResponse<TokenDto>> AuthenticateWithRefresh(SignInWithRefreshCommand command)
+        public async Task<ApiResponse<AuthResponseDto>> AuthenticateWithRefresh(SignInWithRefreshCommand command)
            => await Mediator.Send(command);
 
         [AllowAnonymous]
         [HttpPost]
         [Route("refreshauthentication")]
-        public async Task<ApiResponse<TokenDto>> RefreshAuthentication(RefreshAuthenticationCommand command)
+        public async Task<ApiResponse<AuthResponseDto>> RefreshAuthentication(RefreshAuthenticationCommand command)
             => await Mediator.Send(command);
 
         [HttpPost]

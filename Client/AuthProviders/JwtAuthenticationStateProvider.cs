@@ -1,27 +1,42 @@
-﻿using HandsOnWithBlazor.Client.Models;
-using HandsOnWithBlazor.Client.Services;
+﻿using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components.Authorization;
+using System.Net.Http.Headers;
 using System.Security.Claims;
 
 namespace HandsOnWithBlazor.Client.AuthProviders
 {
     public class JwtAuthenticationStateProvider : AuthenticationStateProvider
     {
-        private SimpleStateContainerService<SimpleStateModel> _stateService { get; set; } = default!;
+        private readonly HttpClient _httpClient;        
+        private readonly ILocalStorageService _localStorage;
+        private readonly AuthenticationState _anonymous;
 
-        public JwtAuthenticationStateProvider(SimpleStateContainerService<SimpleStateModel> stateService)
+        public JwtAuthenticationStateProvider(HttpClient httpClient, ILocalStorageService localStorage)
         {
-            _stateService = stateService;
+            _httpClient = httpClient;
+            _localStorage = localStorage;
+            _anonymous = new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity()));
         }
+        public override async Task<AuthenticationState> GetAuthenticationStateAsync()
+        {            
+            var token = await _localStorage.GetItemAsync<string>("authToken");
 
-        public async override Task<AuthenticationState> GetAuthenticationStateAsync()
+            if (string.IsNullOrWhiteSpace(token))
+                return _anonymous;
+
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", token);
+            return new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity(JwtParser.ParseClaimsFromJwt(token), "jwtAuthType")));
+        }
+        public void NotifyUserAuthentication(string email)
         {
-            var anonymous = new ClaimsIdentity();
-
-            var jwtToken = _stateService.Value.Token;
-
-            //if(string.IsNullOrEmpty(jwtToken))
-                return await Task.FromResult(new AuthenticationState(new ClaimsPrincipal(anonymous)));
+            var authenticatedUser = new ClaimsPrincipal(new ClaimsIdentity(new[] { new Claim(ClaimTypes.Name, email) }, "jwtAuthType"));
+            var authState = Task.FromResult(new AuthenticationState(authenticatedUser));
+            NotifyAuthenticationStateChanged(authState);
+        }
+        public void NotifyUserLogout()
+        {
+            var authState = Task.FromResult(_anonymous);
+            NotifyAuthenticationStateChanged(authState);
         }
     }
 }

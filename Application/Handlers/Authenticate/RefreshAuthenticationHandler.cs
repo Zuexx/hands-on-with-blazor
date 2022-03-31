@@ -7,7 +7,7 @@ using System.Net;
 
 namespace HandsOnWithBlazor.Application.Handlers.Authenticate
 {
-    public class RefreshAuthenticationHandler : IRequestHandler<RefreshAuthenticationCommand, ApiResponse<TokenDto>>
+    public class RefreshAuthenticationHandler : IRequestHandler<RefreshAuthenticationCommand, ApiResponse<AuthResponseDto>>
     {
         private readonly ITokenBuilder _tokenBuilder;
         private readonly IMapper _mapper;
@@ -20,14 +20,14 @@ namespace HandsOnWithBlazor.Application.Handlers.Authenticate
             _mapper = mapper;
         }
 
-        public async Task<ApiResponse<TokenDto>> Handle(RefreshAuthenticationCommand request, CancellationToken cancellation)
+        public async Task<ApiResponse<AuthResponseDto>> Handle(RefreshAuthenticationCommand request, CancellationToken cancellation)
         {            
             var result =
                 await _tokenBuilder.RefreshTokenUsingRefreshTokenAsync(
                     new TokenAndRefreshToken { Token = request.Token, RefreshToken = request.RefreshToken });
 
-            ApiResponse<TokenDto> response =
-                new ApiResponse<TokenDto>(HttpStatusCode.OK.ToString(), string.Empty, new TokenDto()) ;
+            ApiResponse<AuthResponseDto> response =
+                new ApiResponse<AuthResponseDto>(HttpStatusCode.OK.ToString(), string.Empty, new AuthResponseDto()) ;
 
             if (result.updatedTokens ==null)
             {
@@ -37,7 +37,7 @@ namespace HandsOnWithBlazor.Application.Handlers.Authenticate
             }
             
             response.Data =
-                _mapper.Map<TokenDto>(result.updatedTokens);
+                _mapper.Map<AuthResponseDto>(result.updatedTokens);
 
             return response;
         }       

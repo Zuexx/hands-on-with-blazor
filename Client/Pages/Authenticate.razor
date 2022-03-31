@@ -1,6 +1,16 @@
 @page "/authenticate"
 
-<div class="container">
+<div>
+    <AuthorizeView>
+        <Authorized>
+            <p>You are authorized.</p>
+        </Authorized>
+        <NotAuthorized>
+            <p>You are NOT authorized.</p>
+        </NotAuthorized>
+    </AuthorizeView>
+</div>
+<div class="container">    
     <div class='@(isSignUpActivated ? "basePnl active" : "basePnl")'>
         <div class="box signin">
             <h2>Already Have an Account ?</h2>

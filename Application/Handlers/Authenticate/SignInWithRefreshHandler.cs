@@ -8,7 +8,7 @@ using System.Net;
 
 namespace HandsOnWithBlazor.Application.Handlers.Authenticate
 {
-    public class SignInWithRefreshHandler : IRequestHandler<SignInWithRefreshCommand, ApiResponse<TokenDto>>
+    public class SignInWithRefreshHandler : IRequestHandler<SignInWithRefreshCommand, ApiResponse<AuthResponseDto>>
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
@@ -27,24 +27,23 @@ namespace HandsOnWithBlazor.Application.Handlers.Authenticate
             _mapper = mapper;
         }
 
-        public async Task<ApiResponse<TokenDto>> Handle(SignInWithRefreshCommand request, CancellationToken cancellation)
+        public async Task<ApiResponse<AuthResponseDto>> Handle(SignInWithRefreshCommand request, CancellationToken cancellation)
         {
             var result = await _signInManager.PasswordSignInAsync(request.Email, request.Password, false, false);
 
-            ApiResponse<TokenDto> response =
-                new ApiResponse<TokenDto>(HttpStatusCode.OK.ToString(), string.Empty, new TokenDto()) ;
+            ApiResponse<AuthResponseDto> response =
+                new ApiResponse<AuthResponseDto>(HttpStatusCode.OK.ToString(), string.Empty, new AuthResponseDto()) ;
 
             if (!result.Succeeded)
             {
                 response.Status = HttpStatusCode.BadRequest.ToString();
-                response.Message = "Username or password is incorrect";
-
+                response.Message = "Username or password is incorrect";                
                 return response;
             }
             var user = await _userManager.FindByEmailAsync(request.Email);
 
             response.Data =  
-                _mapper.Map<TokenDto>(await _tokenBuilder.GenerateTokenAndRefreshTokenAsync(user.Id));
+                _mapper.Map<AuthResponseDto>(await _tokenBuilder.GenerateTokenAndRefreshTokenAsync(user.Id));
 
             return response;
         }

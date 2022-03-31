@@ -3,7 +3,7 @@ using MediatR;
 
 namespace HandsOnWithBlazor.Application.Handlers.Authenticate.Commands
 {
-    public class RefreshAuthenticationCommand : IRequest<ApiResponse<TokenDto>>
+    public class RefreshAuthenticationCommand : IRequest<ApiResponse<AuthResponseDto>>
     {
         public string Token { get; set; }
         public string RefreshToken { get; set; }
