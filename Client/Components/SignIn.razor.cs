@@ -9,13 +9,9 @@ namespace HandsOnWithBlazor.Client.Components
 {
     public partial class SignIn : ComponentBase, IDisposable
     {
-        [Inject] private HttpClient _httpClient { get; set; }
-
         [Inject] private SimpleStateContainerService<SimpleStateModel> _state { get; set; } = default!;
 
         [Inject] private AuthenticationService _auth { get; set; } = default!;
-
-
 
         private LoginUserModel _user = default!;
 
@@ -30,7 +26,7 @@ namespace HandsOnWithBlazor.Client.Components
             
             if (result.IsAuthSuccessful)
             { 
-            }            
+            }
         }
 
         public void Dispose()

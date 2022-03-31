@@ -1,5 +1,6 @@
 ﻿using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components.Authorization;
+using System.IdentityModel.Tokens.Jwt;
 using System.Net.Http.Headers;
 using System.Security.Claims;
 
@@ -24,8 +25,12 @@ namespace HandsOnWithBlazor.Client.AuthProviders
             if (string.IsNullOrWhiteSpace(token))
                 return _anonymous;
 
+            JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
+            JwtSecurityToken securityToken = (JwtSecurityToken)tokenHandler.ReadToken(token);
+            IEnumerable<Claim> jwtClaims = securityToken.Claims;
+
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", token);
-            return new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity(JwtParser.ParseClaimsFromJwt(token), "jwtAuthType")));
+            return new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity(jwtClaims, "jwtAuthType")));
         }
         public void NotifyUserAuthentication(string email)
         {
